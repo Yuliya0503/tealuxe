@@ -10,11 +10,14 @@ html {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 button {
   padding: 0;
   border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 ul{
@@ -34,6 +37,7 @@ body {
   font-weight: 300;
   line-height: 1.5;
   font-family: 'Open Sans', sans-serif;
+  position: relative;
   /* font-family: 'Cormorant', serif; */
 }
 
@@ -56,12 +60,39 @@ body {
   font-size: 18px;
   font-weight: 400;
   margin-left: 85px;
+  position: relative;
+  z-index: 3;
 }
 
 .menu__btn {
   display: none;
   width: 40px;
   height: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.menu--close {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  transition: background-color .3s ease;
+}
+
+.menu--close.menu--open {
+  display: block;
+}
+
+.mobile-nav,
+.menu__close {
+  display: none;
 }
 
 .menu__btn span {
@@ -147,7 +178,50 @@ body {
 
 @media(max-width: 860px) {
   .menu__list {
-    display: none;
+    transform: translateY(-100%);
+    /* display: none; */
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 480px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    display: block;
+    text-align: center;
+    padding-top: 60px;
+    transition: transform .6s ease;
+  }
+  
+  .menu__list.menu__list--open {
+    transform: translateY(0%);
+  }
+
+  .menu__close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .menu__item {
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-family: 'Cormorant', serif;
+  }
+
+  .mobile-menu {
+    padding-top: 60px;
+    margin: 60px 30px;
+    border-top: 2px solid #F7F2EA;
+  }
+
+  .mobile-actions {
+    background-color: #F7F2EA;
+    height: 60px;
+    padding: 0 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .menu__btn {
@@ -156,9 +230,19 @@ body {
     justify-content: space-between;
   }
 
+  .mobile-nav,
+  .menu__close {
+    display: block;
+  }
+
   .menu {
     order: -1;
     margin-right: 0;
+  }
+
+  .mobile-menu__item {
+    margin-bottom: 35px;
+    font-size: 13px;
   }
 
   .logo {
@@ -203,6 +287,8 @@ body {
     min-width: 376px;
     margin-top: 60px;
     margin-bottom: 60px;
+    margin-left: 50px;
+    margin-right: 50px;
   }
 
 }
@@ -214,6 +300,10 @@ body {
 
   .logo img {
     width: 40px;
+  }
+
+  .menu__list {
+    width: 360px;
   }
 }
 
